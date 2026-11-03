@@ -50,6 +50,7 @@ Medical-device security knowledge is scattered across regulator PDFs, conference
 | 07 | [**Case Studies & CVEs**](docs/07-case-studies-and-cves.md) | The landmark research every med-device tester should know, and what it teaches |
 | 08 | [**Reporting & Disclosure**](docs/08-reporting-and-disclosure.md) | Scoring with the medical CVSS rubric, writing the report, coordinated disclosure |
 | 09 | [**Learning & Community**](docs/09-learning-and-community.md) | Books, courses, conferences, villages, blogs, people, and orgs to follow |
+| 10 | [**Advanced Resources & Deep Dives**](docs/10-advanced-resources.md) | Heavier frameworks (EMB3D, ATT&CK for ICS), NIST NCCoE reference architectures, firmware emulation, fuzzing, AI/ML device security, SBOM/VEX, research corpus |
 
 **Templates** you can copy into an engagement: [pentest report](docs/templates/pentest-report-template.md) · [threat model](docs/templates/threat-model-template.md) · [device assessment checklist](docs/templates/device-assessment-checklist.md)
 
