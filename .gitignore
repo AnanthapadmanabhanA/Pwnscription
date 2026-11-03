@@ -1,0 +1,37 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+.\#*
+
+# Local notes / scratch (keep private research out of the repo)
+scratch/
+notes.local.md
+*.local.md
+/tmp/
+
+# Firmware dumps, captures, and anything that might carry PHI — never commit these
+*.bin
+*.img
+*.pcap
+*.pcapng
+*.dcm
+*.hl7
+dumps/
+captures/
+samples/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node (only if tooling is added later)
+node_modules/
