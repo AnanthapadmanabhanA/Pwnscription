@@ -63,6 +63,13 @@ These are why SBOMs exist: one library, many victims.
 Researchers showed the **128-byte preamble** of the DICOM file format can carry executable content such that a file is simultaneously a valid medical image *and* a runnable executable, complicating AV and trust.
 - **Lesson:** clinical file formats carry parsing and trust assumptions worth testing; "it's just an image" is wrong.
 
+### DICOMweb puts imaging on the web (2025)
+Imaging archives and the cloud imaging services increasingly expose studies over **DICOMweb** - the HTTP/REST profile of DICOM (QIDO-RS query, WADO-RS retrieve, STOW-RS store). The imaging layer then inherits ordinary web and API flaws, reachable with a browser instead of a DIMSE client. Recent, separately reported examples:
+- **Orthanc** (widely used open-source DICOM server and lab target): the built-in HTTP API could be reached **without authentication** in affected default configurations. Advisory: CISA ICSMA-25-037-02 - <https://www.cisa.gov/news-events/ics-medical-advisories/icsma-25-037-02> (CVE-2025-0896).
+- **MedDream PACS**: **server-side request forgery (SSRF)** in the PACS server. Research: Cisco Talos TALOS-2025-2177 - <https://talosintelligence.com/vulnerability_reports/TALOS-2025-2177> (CVE-2025-24485).
+- **dcm4chee-arc-light**: 2025 advisories including unauthenticated study mass-deletion and parser denial-of-service. Advisories: <https://github.com/dcm4che/dcm4chee-arc-light/security/advisories>.
+- **Lesson:** DICOM is no longer only a binary protocol on port 104/11112. Its web layer carries the classes you already know from web/API testing - unauthenticated endpoints, broken object-level authorization on the StudyInstanceUID in the URL, SSRF, CORS misconfiguration, and stored XSS through metadata that web viewers render - while the worst case is unchanged: PHI exposure or a tampered study in front of a clinician. If you test imaging, test **DICOMweb**, not only DIMSE.
+
 ### HL7 v2's trust problem (ongoing; see ManiMed)
 HL7 v2 over MLLP is frequently unauthenticated and unvalidated; crafted messages can spoof orders/results or inject into downstream systems and devices.
 - **Lesson:** integrity of clinical messaging = integrity of clinical decisions. Test it.
