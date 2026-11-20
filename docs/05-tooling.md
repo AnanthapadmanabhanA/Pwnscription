@@ -21,6 +21,7 @@ A practical toolbox, grouped by the surface it serves ([04 · Attack Surface](04
 - **pynetdicom** + **pydicom** - scriptable DICOM networking/parsing in Python. <https://github.com/pydicom/pynetdicom>
 - **Orthanc** - lightweight open-source DICOM server; perfect lab target/receiver. <https://www.orthanc-server.com/>
 - **Evil-DICOM** - library for manipulating DICOM objects (useful for malformed-object/parser testing). <https://github.com/rexcardan/Evil-DICOM>
+- **wadoscope** - DICOMweb (QIDO/WADO/STOW) offensive toolkit for the HTTP layer: endpoint discovery and fingerprinting, plus web-layer checks (unauthenticated access, CORS, BOLA/IDOR on study UIDs, SSRF, stored XSS in metadata). Complements the DIMSE-focused tools above. <https://github.com/AnanthapadmanabhanA/wadoscope>
 
 ### HL7 v2 / FHIR / LIS
 - **Mirth Connect / NextGen Connect** - interface engine to send, receive, transform, and replay HL7/FHIR. <https://github.com/nextgenhealthcare/connect>
