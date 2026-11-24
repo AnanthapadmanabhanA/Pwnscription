@@ -33,6 +33,10 @@ Imaging devices, PACS, and workstations speak **DICOM** for images and the netwo
 - **Check:** can an unauthorized node store/query/retrieve studies? Are AE titles / calling hosts enforced? Does the parser survive malformed objects (fuzzing)? Is DICOMweb (QIDO/WADO/STOW) authenticated and authorized?
 - **Practice safely:** stand up **Orthanc** (open-source DICOM server) and talk to it with DCMTK / pynetdicom.
 
+**DICOMweb (the HTTP layer).** Modern PACS and the cloud imaging services (Google / Azure / AWS) also expose imaging over **DICOMweb** - QIDO-RS (query), WADO-RS (retrieve), STOW-RS (store) - so the imaging layer inherits ordinary web and API bugs that are reachable from a browser and that DIMSE-only tooling never sees.
+- **Watch for:** `/studies` reachable without authentication, CORS misconfiguration that lets any origin read PHI, broken object-level authorization (IDOR) on the **StudyInstanceUID** in the URL path, SSRF via retrieve-by-reference, and stored XSS in metadata fields that web viewers render as HTML.
+- **Check:** is every QIDO/WADO/STOW endpoint authenticated *and* scoped to the right objects? Any cross-origin exposure of studies? Can one principal reach another's study just by changing the UID? Recent DICOMweb CVEs are in [07](07-case-studies-and-cves.md), and **wadoscope** in [05](05-tooling.md) automates testing this surface.
+
 ### HL7 v2 (clinical messaging)
 The backbone of hospital data exchange (orders, results, ADT). Pipe-delimited, old, and frequently **unauthenticated over MLLP/TCP**.
 - **Watch for:** message injection/spoofing (forge an order or a result), tampering in transit (no integrity), and **injection through unvalidated HL7 fields** into downstream systems (the ManiMed/ERNW work documented HL7v2 injection reaching patient monitors).
