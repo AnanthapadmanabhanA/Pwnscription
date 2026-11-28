@@ -34,6 +34,11 @@ Detailed public research + a MQX RTOS RCE on the **Smiths Medical Medfusion 4000
 
 ## Patient monitors & the supply chain
 
+### GE CARESCAPE patient monitoring - "MDhex" (2020)
+CyberMDX researcher Elad Luz disclosed six vulnerabilities (collectively **MDhex**) across GE Healthcare's **CARESCAPE** patient-monitoring ecosystem - the CARESCAPE Central Station and CIC/CIC Pro workstations, the B450/B650/B850 bedside monitors, and the ApexPro and CARESCAPE telemetry servers. The common thread was credentials and management services that were never meant to face a hostile network: an SSH private key hard-coded and **shared across the product line** (remote code execution), SMB and VNC credentials that were likewise hard-coded, shared, and in places published in documentation, a remote keyboard/mouse/clipboard control service (Kavoom KM) with no authentication, an unauthenticated software-update path, and a deprecated, known-vulnerable Webmin build.
+- Advisory: CISA **ICSMA-20-023-01** (CVE-2020-6961 through CVE-2020-6966). Research: <https://www.forescout.com/research-labs/mdhex-vulnerability/>
+- **Lesson:** a shared secret is a fleet-wide secret. One hard-coded SSH key or VNC password reused across an entire product line turns "an attacker reached the clinical VLAN" into "an attacker controls every monitor on it." Enumerate the management services a device exposes (SSH, SMB, VNC, web admin) and treat any credential that ships identical on every unit as already public.
+
 ### Contec CMS8000 backdoor (2025)
 CISA and FDA warned that **Contec CMS8000** patient monitors (also rebadged, e.g. Epsimed MN-120) contained firmware that **beacons to a hard-coded external IP and transmits plaintext patient data**, plus a function allowing remote file upload/overwrite, effectively a backdoor.
 - Advisory: **ICSMA-25-030-01**; CVE-2025-0626, CVE-2025-0683, CVE-2024-12248. CISA fact sheet: <https://www.cisa.gov/resources-tools/resources/contec-cms8000-contains-backdoor>
